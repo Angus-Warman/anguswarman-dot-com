@@ -1,0 +1,132 @@
+:root {
+    --color-bg: #f0f2f5;
+    --color-card-bg: #ffffff;
+    --color-card-shadow: rgba(0, 0, 0, 0.1);
+    --color-text: #111;
+    --color-text-secondary: #333;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #121212;
+        --color-card-bg: #1e1e1e;
+        --color-card-shadow: rgba(0, 0, 0, 0.5);
+        --color-text: #eee;
+        --color-text-secondary: #ccc;
+    }
+}
+
+body {
+    background: var(--color-bg);
+    font-family: system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    background: var(--color-card-bg);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav a svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--color-text);
+    transition: transform 0.3s ease, fill 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--color-text-secondary);
+}
+
+nav a:hover svg {
+    transform: scale(1.2);
+    fill: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+    nav {
+        width: 60px;
+        padding: 1rem 0.5rem;
+    }
+
+    nav a span {
+        display: none;
+    }
+
+    nav a {
+        justify-content: center;
+        flex-direction: column;
+    }
+}
+
+main {
+    margin-left: 0;
+    transition: margin-left 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    main {
+        margin-left: 220px;
+    }
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+    main {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+body {
+    counter-reset: section;
+}
+
+section {
+    counter-increment: section;
+    background: var(--color-card-bg);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px var(--color-card-shadow);
+    opacity: 1;
+}
+
+section h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: var(--color-text);
+}
+
+section p {
+    margin-bottom: 0;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+}
