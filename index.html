@@ -11,16 +11,9 @@
     <title>Angus Warman Dot Com</title>
     <style>
         :root {
-            --color-bg: #f0f2f5;
+            --color-bg: #0d0f0d;
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --color-bg: #121212;
-            }
-        }
-
-        /* Early body bg to prevent flash */
         html,
         body {
             background-color: var(--color-bg);
@@ -30,8 +23,14 @@
 
 <body>
     <nav>
-        <a hx-get="/home.html" hx-target="main" hx-push-url="/" hx-swap="innerHTML">Home</a>
-        <a hx-get="/about.html" hx-target="main" hx-push-url="/about" hx-swap="innerHTML">About Me</a>
+        <a hx-get="/home.html" hx-target="main" hx-push-url="/" hx-swap="innerHTML">
+            <span class="icon">H</span>
+            <span class="label">Home</span>
+        </a>
+        <a hx-get="/about.html" hx-target="main" hx-push-url="/about" hx-swap="innerHTML">
+            <span class="icon">A</span>
+            <span class="label">About Me</span>
+        </a>
     </nav>
 
     <main id="main">

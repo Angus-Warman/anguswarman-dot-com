@@ -1,95 +1,63 @@
 :root {
-    --color-bg: #f0f2f5;
-    --color-card-bg: #ffffff;
-    --color-card-shadow: rgba(0, 0, 0, 0.1);
-    --color-text: #111;
-    --color-text-secondary: #333;
+    --bg: #0d0f0d;
+    --panel: #111411;
+    --border: #1f2a1f;
+    --text: #00ff88;
+    --dim: #1aff9c;
+    --highlight: #00ff88;
+    --shadow: rgba(0, 255, 136, 0.2);
+    --font: "Courier New", Courier, monospace;
+
+    --sidebar-collapsed-width: 64px;
+    --sidebar-expanded-width: 220px;
+    --icon-size: 36px;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-bg: #121212;
-        --color-card-bg: #1e1e1e;
-        --color-card-shadow: rgba(0, 0, 0, 0.5);
-        --color-text: #eee;
-        --color-text-secondary: #ccc;
-    }
+* {
+    box-sizing: border-box;
 }
 
+html,
 body {
-    background: var(--color-bg);
-    font-family: system-ui, -apple-system, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    line-height: 1.6;
 }
 
-nav {
-    background: var(--color-card-bg);
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-    padding: 0.75rem;
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    box-sizing: border-box;
-    z-index: 1000;
-}
-
-nav a {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--color-text);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    transition: color 0.3s ease, transform 0.2s ease;
-}
-
-nav a svg {
-    width: 24px;
-    height: 24px;
-    fill: var(--color-text);
-    transition: transform 0.3s ease, fill 0.3s ease;
-}
-
-nav a:hover {
-    color: var(--color-text-secondary);
-}
-
-nav a:hover svg {
-    transform: scale(1.2);
-    fill: var(--color-text-secondary);
-}
-
-@media (max-width: 768px) {
-    nav {
-        width: 60px;
-        padding: 1rem 0.5rem;
-    }
-
-    nav a span {
-        display: none;
-    }
-
-    nav a {
-        justify-content: center;
-        flex-direction: column;
-    }
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(to bottom,
+            rgba(0, 255, 136, 0.03),
+            rgba(0, 255, 136, 0.03) 1px,
+            transparent 1px,
+            transparent 3px);
+    pointer-events: none;
+    z-index: 9999;
 }
 
 main {
-    margin-left: 0;
-    transition: margin-left 0.3s ease;
+    margin-left: var(--sidebar-collapsed-width);
+    padding: 2rem;
+    min-height: 100vh;
+    transition: margin 0.3s ease;
 }
 
-@media (min-width: 768px) {
-    main {
-        margin-left: 220px;
-    }
+section {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 10px var(--shadow);
+    border-radius: 6px;
+    position: relative;
 }
 
-main {
+responsive {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -100,33 +68,140 @@ main {
 }
 
 @media (min-width: 768px) {
-    main {
+    responsive {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-body {
-    counter-reset: section;
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-collapsed-width);
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: 0 0 20px var(--shadow);
+    transition: all 0.3s ease;
+    z-index: 1000;
 }
 
-section {
-    counter-increment: section;
-    background: var(--color-card-bg);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: 0 4px 12px var(--color-card-shadow);
-    opacity: 1;
+nav:hover,
+nav:has(*:hover) {
+    width: var(--sidebar-expanded-width);
 }
 
-h2 {
-    margin-top: 0;
-    font-size: 1.5rem;
-    color: var(--color-text);
+nav a {
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    overflow: hidden;
+    white-space: nowrap;
+    justify-content: left;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
-p {
-    margin-bottom: 0;
-    line-height: 1.6;
-    font-size: 1rem;
-    color: var(--color-text-secondary);
+nav a:hover {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: var(--highlight);
+    transform: translateY(-3px);
+}
+
+nav a:active {
+    transform: translateY(0px);
+    transition-duration: 0.12s;
+}
+
+nav a[aria-current="page"] {
+    background: var(--highlight);
+    color: #000;
+    font-weight: bold;
+    box-shadow: 0 0 8px var(--highlight);
+}
+
+nav a .icon {
+    font-size: 24px;
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+nav a .label {
+    display: none;
+}
+
+/* Show labels when nav is expanded (hover or active hover state) */
+nav:hover a .label,
+nav:has(*:hover) a .label {
+    display: inline;
+    margin-right: 8px;
+}
+
+a {
+    color: var(--dim);
+}
+
+a:hover {
+    text-shadow: 0 0 5px var(--highlight);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--highlight);
+}
+
+@media (max-width: 768px) {
+    nav {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    nav:hover,
+    nav:has(*:hover) {
+        /* Do nothing */
+        width: 100%;
+    }
+
+    nav a {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+    /* On small screens always show the label */
+    nav a .label {
+        display: inline;
+    }
+
+    /* on small screens keep buttons left-aligned */
+    nav a {
+        justify-content: flex-start;
+    }
+
+    main {
+        margin-left: 0;
+        padding: 1.5rem;
+    }
+
+    section {
+        padding: 1rem;
+    }
 }
