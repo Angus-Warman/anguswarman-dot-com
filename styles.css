@@ -118,13 +118,13 @@ section {
     opacity: 1;
 }
 
-section h2 {
+h2 {
     margin-top: 0;
     font-size: 1.5rem;
     color: var(--color-text);
 }
 
-section p {
+p {
     margin-bottom: 0;
     line-height: 1.6;
     font-size: 1rem;

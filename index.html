@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"
+        integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <title>Angus Warman Dot Com</title>
     <style>
@@ -27,25 +30,42 @@
 
 <body>
     <nav>
-        <a href="/">Home</a>
+        <a hx-get="/home.html" hx-target="main" hx-push-url="/" hx-swap="innerHTML">Home</a>
+        <a hx-get="/about.html" hx-target="main" hx-push-url="/about" hx-swap="innerHTML">About Me</a>
     </nav>
 
-    <main>
-        <section>
-            <h2>Angus Warman Dot Com</h2>
-            <p>Welcome.</p>
-        </section>
+    <main id="main">
 
-        <section>
-            <h2>This is my website</h2>
-            <p>It contains things of interest to me, and projects I am working on.</p>
-        </section>
-
-        <section>
-            <h2>You are currently looking at one such project</h2>
-            <p>How very meta.</p>
-        </section>
     </main>
 </body>
+
+<script>
+    document.body.addEventListener("htmx:afterSwap", () => {
+        const path = location.pathname;
+
+        document.querySelectorAll("nav a").forEach(a => {
+            const linkPath = a.getAttribute("hx-push-url")
+            if (linkPath === path) {
+                a.setAttribute("aria-current", "page");
+            } else {
+                a.removeAttribute("aria-current")
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const page = document.getElementById("main")
+
+        const routeMap = {
+            "/": "/home.html",
+            "/about": "/about.html",
+        }
+
+        const path = location.pathname.replace(/\/$/, "") || "/"
+        const url = routeMap[path] || "/404.html"
+
+        htmx.ajax("GET", url, { target: page, swap: "innerHTML" })
+    })
+</script>
 
 </html>
