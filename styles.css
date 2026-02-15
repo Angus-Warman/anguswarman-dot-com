@@ -198,6 +198,7 @@ a:hover {
 
     nav a .label {
         display: inline;
+        margin-right: 8px;
     }
 
     main {
