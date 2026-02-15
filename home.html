@@ -1,16 +1,60 @@
+<h2>Angus Warman Dot Com</h2>
+
+<style>
+    .marquee {
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .marquee div {
+        display: inline-flex;
+        animation: scroll 10s linear infinite;
+    }
+
+    .marquee span {
+        white-space: nowrap;
+    }
+
+    @keyframes scroll {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+</style>
+
 <responsive>
     <section>
-        <h2>Angus Warman Dot Com</h2>
-        <p>Welcome.</p>
+        <h3>Welcome.</h3>
+
+        <p>This is my website. I made it with my own two hands, and a significant amount of Googling.</p>
+
+        <p>Ideally, it will contain many things, and be a final home for the many lost, unfinished projects I have
+            started.</p>
+
+        <p>For now, it is just <a href="/about">about me</a>.</p>
     </section>
 
     <section>
-        <h2>This is my website</h2>
-        <p>It contains things of interest to me, and projects I am working on.</p>
-    </section>
+        <h3>I have approximate knowledge of many things.</h3>
 
-    <section>
-        <h2>You are currently looking at one such project</h2>
-        <p>How very meta.</p>
+        <p>Including at least a partial familiarity with the following:</p>
+
+        <div class="marquee">
+            <div>
+                <span>
+                    C#, Rust, Zig, Python, Go, HTML, CSS, Javascript, Typescript, React, WPF, Git, CI/CD, Docker, SQL,
+                    PostgreSQL, Agile, Excel formulas, copyediting, proofreading, team management,&nbsp;
+                </span>
+                <span>
+                    C#, Rust, Zig, Python, Go, HTML, CSS, Javascript, Typescript, React, WPF, Git, CI/CD, Docker, SQL,
+                    PostgreSQL, Agile, Excel formulas, copyediting, proofreading, team management,&nbsp;
+                </span>
+            </div>
+        </div>
     </section>
 </responsive>

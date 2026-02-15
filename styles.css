@@ -27,6 +27,7 @@ body {
     line-height: 1.6;
 }
 
+/* Scanline effect */
 body::before {
     content: "";
     position: fixed;
@@ -47,16 +48,18 @@ main {
     transition: margin 0.3s ease;
 }
 
+/* <section> plays the role of Cards in modern-ish design */
 section {
     background: var(--panel);
     border: 1px solid var(--border);
     padding: 1.5rem;
-    margin-bottom: 2rem;
     box-shadow: 0 0 10px var(--shadow);
     border-radius: 6px;
     position: relative;
+    min-width: 0;
 }
 
+/* A custom element, divides into two columns on large screens */
 responsive {
     display: grid;
     grid-template-columns: 1fr;
@@ -73,6 +76,7 @@ responsive {
     }
 }
 
+/* Desktop sidebar, hover causes it to expand */
 nav {
     position: fixed;
     top: 0;
@@ -95,6 +99,7 @@ nav:has(*:hover) {
     width: var(--sidebar-expanded-width);
 }
 
+/* Navigation buttons */
 nav a {
     color: var(--text);
     text-decoration: none;
@@ -109,17 +114,20 @@ nav a {
     transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
+/* Slightly rises up when hovered */
 nav a:hover {
     background: rgba(0, 255, 136, 0.1);
     border-color: var(--highlight);
     transform: translateY(-3px);
 }
 
+/* Clicks downwards when pressed */
 nav a:active {
     transform: translateY(0px);
     transition-duration: 0.12s;
 }
 
+/* Selected page state tracked using aria-current. Value is set on page load. */
 nav a[aria-current="page"] {
     background: var(--highlight);
     color: #000;
@@ -127,17 +135,18 @@ nav a[aria-current="page"] {
     box-shadow: 0 0 8px var(--highlight);
 }
 
+/* Currently text-based, would work better with SVGs */
 nav a .icon {
     font-size: 24px;
     margin-left: 8px;
     font-weight: bold;
 }
 
+/* Default hidden labels until sidebar expands */
 nav a .label {
     display: none;
 }
 
-/* Show labels when nav is expanded (hover or active hover state) */
 nav:hover a .label,
 nav:has(*:hover) a .label {
     display: inline;
@@ -164,6 +173,7 @@ a:hover {
     background: var(--highlight);
 }
 
+/* Mobile-only styles */
 @media (max-width: 768px) {
     nav {
         position: relative;
@@ -186,14 +196,8 @@ a:hover {
         white-space: nowrap;
     }
 
-    /* On small screens always show the label */
     nav a .label {
         display: inline;
-    }
-
-    /* on small screens keep buttons left-aligned */
-    nav a {
-        justify-content: flex-start;
     }
 
     main {

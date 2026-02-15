@@ -7,9 +7,12 @@
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"
         integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz"
         crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link rel="stylesheet" href="styles.css">
     <title>Angus Warman Dot Com</title>
     <style>
+        /* Set background during initial load to avoid white flash */
         :root {
             --color-bg: #0d0f0d;
         }
@@ -30,6 +33,11 @@
         <a hx-get="/about.html" hx-target="main" hx-push-url="/about" hx-swap="innerHTML">
             <span class="icon">A</span>
             <span class="label">About Me</span>
+        </a>
+
+        <a hx-get="/spare-me.html" hx-target="main" hx-push-url="/spare-me" hx-swap="innerHTML">
+            <span class="icon">S</span>
+            <span class="label">SPAre me...</span>
         </a>
     </nav>
 
@@ -58,6 +66,7 @@
         const routeMap = {
             "/": "/home.html",
             "/about": "/about.html",
+            "/spare-me": "/spare-me.html",
         }
 
         const path = location.pathname.replace(/\/$/, "") || "/"
