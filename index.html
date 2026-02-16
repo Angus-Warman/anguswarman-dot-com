@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"
-        integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link rel="stylesheet" href="styles.css">
@@ -21,27 +19,37 @@
         body {
             background-color: var(--color-bg);
         }
+
+        /* Larger screen only */
+        @media (min-width: 768px) {
+            #dashboard {
+                margin-left: var(--sidebar-collapsed-width);
+                padding: 2rem;
+                min-height: 100vh;
+                transition: margin 0.3s ease;
+            }
+        }
     </style>
 </head>
 
 <body>
     <nav>
-        <a hx-get="/home.html" hx-target="main" hx-push-url="/" hx-swap="innerHTML">
+        <a hx-get="/home.html" hx-target="#dashboard" hx-push-url="/" hx-swap="innerHTML">
             <span class="icon">H</span>
             <span class="label">Home</span>
         </a>
-        <a hx-get="/about.html" hx-target="main" hx-push-url="/about" hx-swap="innerHTML">
+        <a hx-get="/about.html" hx-target="#dashboard" hx-push-url="/about" hx-swap="innerHTML">
             <span class="icon">A</span>
             <span class="label">About Me</span>
         </a>
 
-        <a hx-get="/spare-me.html" hx-target="main" hx-push-url="/spare-me" hx-swap="innerHTML">
+        <a hx-get="/spare-me.html" hx-target="#dashboard" hx-push-url="/spare-me" hx-swap="innerHTML">
             <span class="icon">S</span>
             <span class="label">SPAre me...</span>
         </a>
     </nav>
 
-    <main id="main">
+    <main id="dashboard">
 
     </main>
 </body>
@@ -60,19 +68,22 @@
         });
     });
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const page = document.getElementById("main")
+    const page = document.getElementById("dashboard")
 
-        const routeMap = {
-            "/": "/home.html",
-            "/about": "/about.html",
-            "/spare-me": "/spare-me.html",
+    // On reload, calculate the correct page and swap it on
+    document.addEventListener("DOMContentLoaded", () => {
+        const path = location.pathname.replace(/\/$/, "") || "/home"
+        const url = path + ".html"
+        htmx.ajax("GET", url, { target: page, swap: "innerHTML" })
+    })
+
+    // On fail, get the 404 page instead
+    document.body.addEventListener("htmx:responseError", (evt) => {
+        if (evt.detail.pathInfo?.requestPath?.endsWith("/404.html")) {
+            return
         }
 
-        const path = location.pathname.replace(/\/$/, "") || "/"
-        const url = routeMap[path] || "/404.html"
-
-        htmx.ajax("GET", url, { target: page, swap: "innerHTML" })
+        htmx.ajax("GET", "/404.html", { target: page, swap: "innerHTML" })
     })
 </script>
 

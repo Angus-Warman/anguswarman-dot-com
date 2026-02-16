@@ -41,13 +41,6 @@ body::before {
     z-index: 9999;
 }
 
-main {
-    margin-left: var(--sidebar-collapsed-width);
-    padding: 2rem;
-    min-height: 100vh;
-    transition: margin 0.3s ease;
-}
-
 /* <section> plays the role of Cards in modern-ish design */
 section {
     background: var(--panel);
@@ -209,4 +202,8 @@ a:hover {
     section {
         padding: 1rem;
     }
+}
+
+article {
+    margin: 1rem;
 }
