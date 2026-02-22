@@ -4,9 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <link rel="stylesheet" href="styles.css">
     <title>Angus Warman Dot Com</title>
     <style>
@@ -19,72 +16,48 @@
         body {
             background-color: var(--color-bg);
         }
-
-        /* Larger screen only */
-        @media (min-width: 768px) {
-            #dashboard {
-                margin-left: var(--sidebar-collapsed-width);
-                padding: 2rem;
-                min-height: 100vh;
-                transition: margin 0.3s ease;
-            }
-        }
     </style>
 </head>
 
 <body>
-    <nav>
-        <a hx-get="/home.html" hx-target="#dashboard" hx-push-url="/" hx-swap="innerHTML">
-            <span class="icon">H</span>
-            <span class="label">Home</span>
-        </a>
-        <a hx-get="/about.html" hx-target="#dashboard" hx-push-url="/about" hx-swap="innerHTML">
-            <span class="icon">A</span>
-            <span class="label">About Me</span>
-        </a>
+    <main>
+        <h2>Angus Warman Dot Com</h2>
 
-        <a hx-get="/spare-me.html" hx-target="#dashboard" hx-push-url="/spare-me" hx-swap="innerHTML">
-            <span class="icon">S</span>
-            <span class="label">SPAre me...</span>
-        </a>
-    </nav>
+        <responsive>
+            <section>
+                <h3>Welcome.</h3>
 
-    <main id="dashboard">
+                <p>This is my website. I made it with my own two hands, and a significant amount of Googling.</p>
 
+                <p>Ideally, it will contain many things, and be a final home for the many lost, unfinished projects I have started.</p>
+
+            </section>
+
+            <section>
+                <a href="/about.html">
+                    <h3>About Me</h3>
+                </a>
+
+                <p>I have approximate knowledge of many things.</p>
+            </section>
+
+            <section>
+                <a href="/spare-me.html">
+                    <h3>SPAre Me</h3>
+                </a>
+
+                <p>Are you sure that internal metrics dashboard needs to be a React SPA?</p>
+            </section>
+
+            <section>
+                <a href="/pages/2026-02-15-some-thoughts-on-ai.html">
+                    <h3>Some Thoughts On AI</h3>
+                </a>
+
+                <p>Basically, only get it to write code that doesn't matter (there is a lot of that going around)</p>
+            </section>
+        </responsive>
     </main>
 </body>
-
-<script>
-    document.body.addEventListener("htmx:afterSwap", () => {
-        const path = location.pathname;
-
-        document.querySelectorAll("nav a").forEach(a => {
-            const linkPath = a.getAttribute("hx-push-url")
-            if (linkPath === path) {
-                a.setAttribute("aria-current", "page");
-            } else {
-                a.removeAttribute("aria-current")
-            }
-        });
-    });
-
-    const page = document.getElementById("dashboard")
-
-    // On reload, calculate the correct page and swap it on
-    document.addEventListener("DOMContentLoaded", () => {
-        const path = location.pathname.replace(/\/$/, "") || "/home"
-        const url = path + ".html"
-        htmx.ajax("GET", url, { target: page, swap: "innerHTML" })
-    })
-
-    // On fail, get the 404 page instead
-    document.body.addEventListener("htmx:responseError", (evt) => {
-        if (evt.detail.pathInfo?.requestPath?.endsWith("/404.html")) {
-            return
-        }
-
-        htmx.ajax("GET", "/404.html", { target: page, swap: "innerHTML" })
-    })
-</script>
 
 </html>

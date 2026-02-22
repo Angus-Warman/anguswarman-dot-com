@@ -1,3 +1,70 @@
-<h2>About</h2>
+<!DOCTYPE html>
+<html>
 
-<p>This will be an About Me page. Eventually.</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Angus Warman Dot Com</title>
+    <style>
+        /* Set background during initial load to avoid white flash */
+        :root {
+            --color-bg: #0d0f0d;
+        }
+
+        html,
+        body {
+            background-color: var(--color-bg);
+        }
+
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        .marquee div {
+            display: inline-flex;
+            animation: scroll 15s linear infinite;
+        }
+
+        .marquee span {
+            white-space: nowrap;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h2>About Me</h2>
+
+        <responsive>
+            <section>
+                <h3>I have approximate knowledge of many things.</h3>
+
+                <p>Including at least a partial familiarity with the following:</p>
+
+                <div class="marquee">
+                    <div>
+                        <span>
+                            C#, Rust, Zig, Python, Go, HTML, CSS, Javascript, Typescript, React, WPF, Git, CI/CD, DevOps, Docker, SQL, PostgreSQL, Agile, Excel, copyediting, proofreading,&nbsp;
+                        </span>
+                        <span>
+                            C#, Rust, Zig, Python, Go, HTML, CSS, Javascript, Typescript, React, WPF, Git, CI/CD, DevOps, Docker, SQL, PostgreSQL, Agile, Excel, copyediting, proofreading,&nbsp;
+                        </span>
+                    </div>
+                </div>
+            </section>
+        </responsive>
+    </main>
+</body>

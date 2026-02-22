@@ -1,0 +1,45 @@
+<h2>SPAre Me...</h2>
+
+<p>Does that internal metrics dashboard need to be a React SPA?</p>
+
+<responsive>
+    <section>
+        <h3>Have you tried anything else?</h3>
+
+        <p>Perhaps a traditional MPA would be fine. Remember those?</p>
+
+        <p>This page was created using <a href="https://htmx.org/">HTMX</a>, with a small amount of Javascript mangling to allow it to be fully statically hosted.</p>
+
+        <p>It works better with a real server backing it to handle the minimal routing and composition required, rather than needing two server round-trips for the initial load. However, you're welcome to write said server (or serverless functions) in the language of your choice.</p>
+    </section>
+
+    <section>
+        <h3>React is a fundamentually unserious piece of engineering</h3>
+
+        <p>This example is from the excellent guide to <a href="https://www.joshwcomeau.com/react/common-beginner-mistakes/#accessing-state-after-changing-it-5">Common Beginner Mistakes in React</a>. Take a look at this:</p>
+
+        <pre>
+function App() {
+    const [x, setX] = React.useState(0);
+
+    function foo() {
+        setX(5);
+        console.assert(x == 5);
+        // Fails
+    }
+}
+        </pre>
+
+        <p>If any other language tried to pull something like this, it'd be laughed out of the room. Yes, I know, rendering and so forth. But look at it.</p>
+
+        <p>("But React is a framework, it isn't a programming language", it sure is treated like one)</p>
+    </section>
+
+    <section>
+        <h3>But what about state management?</h3>
+
+        <p>What state are you managing? Are you creating Google Docs? Or Figma v2? Or Facebook-but-better? If you are, then you probably need some heavyweight client-side state management, and I wish you all the best.</p>
+
+        <p>Alternatively, if the sum total of state is the currently loaded page and the date range filter...</p>
+    </section>
+</responsive>

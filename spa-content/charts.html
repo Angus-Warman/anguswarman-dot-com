@@ -1,0 +1,79 @@
+<h2>Charts</h2>
+
+<responsive>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            min-width: 0;
+        }
+    </style>
+
+    <section>
+        <div class="chart-container">
+            <canvas id="chart"></canvas>
+        </div>
+
+        <script>
+            function initChart() {
+                const ctx = document.getElementById('chart');
+
+                Chart.defaults.color = '#00ff88';
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['1', '2', '3', '4', '5'],
+                        datasets: [
+                            {
+                                label: 'Complexity',
+                                data: [90, 75, 60, 45, 30],
+                                borderColor: '#ef4444',
+                                backgroundColor: '#ef4444',
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Infrastructure required',
+                                data: [40, 55, 50, 35, 25],
+                                borderColor: '#3b82f6',
+                                backgroundColor: '#3b82f6',
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Maintainability',
+                                data: [30, 40, 50, 52, 52],
+                                borderColor: '#e8822e',
+                                backgroundColor: '#e8822e',
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'What about charts?',
+                                font: {
+                                    size: 20
+                                }
+                            },
+                            legend: {
+                                position: 'bottom'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            }
+                        }
+                    }
+                });
+            }
+
+            initChart();
+        </script>
+    </section>
+</responsive>

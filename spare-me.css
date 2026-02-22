@@ -1,0 +1,126 @@
+:root {
+    --sidebar-collapsed-width: 64px;
+    --sidebar-expanded-width: 220px;
+    --icon-size: 36px;
+}
+
+/* Larger screen only */
+@media (min-width: 768px) {
+    #dashboard {
+        margin-left: var(--sidebar-collapsed-width);
+        padding: 2rem;
+        min-height: 100vh;
+        transition: margin 0.3s ease;
+    }
+}
+
+/* Desktop sidebar, hover causes it to expand */
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-collapsed-width);
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: 0 0 20px var(--shadow);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+#sidebar:hover,
+#sidebar:has(*:hover) {
+    width: var(--sidebar-expanded-width);
+}
+
+/* Navigation buttons */
+#sidebar a {
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    overflow: hidden;
+    white-space: nowrap;
+    justify-content: left;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+/* Slightly rises up when hovered */
+#sidebar a:hover {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: var(--highlight);
+    transform: translateY(-3px);
+}
+
+/* Clicks downwards when pressed */
+#sidebar a:active {
+    transform: translateY(0px);
+    transition-duration: 0.12s;
+}
+
+/* Selected page state tracked using aria-current. Value is set on page load. */
+#sidebar a[aria-current="page"] {
+    background: var(--highlight);
+    color: #000;
+    font-weight: bold;
+    box-shadow: 0 0 8px var(--highlight);
+}
+
+/* Currently text-based, would work better with SVGs */
+#sidebar a .icon {
+    font-size: 24px;
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+/* Default hidden labels until sidebar expands */
+#sidebar a .label {
+    display: none;
+}
+
+#sidebar:hover a .label,
+#sidebar:has(*:hover) a .label {
+    display: inline;
+    margin-right: 8px;
+}
+
+/* Mobile-only styles */
+@media (max-width: 768px) {
+    #sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    #sidebar:hover,
+    #sidebar:has(*:hover) {
+        /* Do nothing */
+        width: 100%;
+    }
+
+    #sidebar a {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+    #sidebar a .label {
+        display: inline;
+        margin-right: 8px;
+    }
+
+    #dashboard {
+        margin-left: 0;
+        padding: 1.5rem;
+    }
+}
