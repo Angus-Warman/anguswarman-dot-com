@@ -4,59 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
+    <meta name="color-scheme" content="dark">
     <title>Angus Warman Dot Com</title>
     <style>
         /* Set background during initial load to avoid white flash */
         :root {
-            --color-bg: #0d0f0d;
+            --bg: #0d0d0f;
         }
 
-        html,
-        body {
-            background-color: var(--color-bg);
+        html {
+            background-color: var(--bg);
         }
     </style>
 </head>
 
 <body>
     <main>
-        <h2>Angus Warman Dot Com</h2>
+        <article>
+            <h2>Angus Warman Dot Com</h2>
+            <blockquote>
+                <p>Computer science is when it works on my computer.</p>
+                <p>Software engineering is when it works on <i>your</i> computer.</p>
+            </blockquote>
 
-        <responsive>
             <section>
-                <h3>Welcome.</h3>
-
-                <p>This is my website. I made it with my own two hands, and a significant amount of Googling.</p>
-
-                <p>Ideally, it will contain many things, and be a final home for the many lost, unfinished projects I have started.</p>
-
+                I am an aspiring writer. Code? Sure. Novels? Sure. Documentation for legacy projects that everyone else has forgotten/wish they could forget? ...sure.
             </section>
 
             <section>
-                <a href="/about.html">
-                    <h3>About Me</h3>
-                </a>
+                <h3>Skills include:</h3>
 
-                <p>I have approximate knowledge of many things.</p>
+                <div class="marquee">
+                    <div>
+                        <span>
+                            C#, Rust, Zig, Python, Go, HTML, CSS, Javascript, Typescript, React, WPF, Git, CI/CD, DevOps, Docker, SQL, PostgreSQL, Agile, Excel,&nbsp;
+                        </span>
+                        <span>
+                            C#, Rust, Zig, Python, Go, HTML, CSS, Javascript, Typescript, React, WPF, Git, CI/CD, DevOps, Docker, SQL, PostgreSQL, Agile, Excel,&nbsp;
+                        </span>
+                    </div>
+                </div>
             </section>
 
-            <section>
-                <a href="/spare-me.html">
-                    <h3>SPAre Me</h3>
-                </a>
+            <section class="column">
+                <h3>Projects</h3>
 
-                <p>Are you sure that internal metrics dashboard needs to be a React SPA?</p>
+                <section class="border">
+                    <h4><a href="https://github.com/Angus-Warman/htmx-cloudflare-template">HTMX Cloudflare Template</a></h4>
+
+                    <p>For rapid deployment of new full-stack prototypes.</p>
+
+                    <p>Fetch the code. <code>npm run setup</code> to preview. <code>npm run deploy</code> to deploy. Done.</p>
+
+                    <p>You can see it in action <a href="https://htmx-cloudflare-template.anguswarman.workers.dev/">here</a>.</p>
+                </section>
+
+                <section class="border">
+                    <h4><a href="https://github.com/Angus-Warman/hello-world-complete">Hello World - Complete</a></h4>
+
+                    <p>A example, mostly for my own benefit, of full end-to-end deployment. Builds a Go project for Windows, Mac and Linux, then deploys to a VM. Nothing ground-breaking, just CI/CD/C-done.</p>
+                </section>
+
             </section>
-
-            <section>
-                <a href="/pages/2026-02-15-some-thoughts-on-ai.html">
-                    <h3>Some Thoughts On AI</h3>
-                </a>
-
-                <p>Basically, only get it to write code that doesn't matter (there is a lot of that going around)</p>
-            </section>
-        </responsive>
+        </article>
     </main>
 </body>
 
