@@ -2,15 +2,21 @@
     --corner: 0.5rem;
     --text: #eeeeee;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-    --panel: #44445c;
+    --panel: #2a3823;
     --font-size: 16px;
     --corner: 0.5rem;
     /* Background is set on index.html, not here */
 }
 
 * {
-    color: var(--text);
     box-sizing: border-box;
+}
+
+body,
+main,
+html {
+    padding: 0;
+    margin: 0;
 }
 
 html {
@@ -21,14 +27,8 @@ html {
 
 p,
 span {
+    color: var(--text);
     font-size: var(--font-size);
-}
-
-body,
-main,
-html {
-    padding: 0;
-    margin: 0;
 }
 
 article {
@@ -55,7 +55,7 @@ blockquote>p {
 section {
     background: var(--panel);
     padding: 1.5rem;
-    box-shadow: 0 0 10px var(--shadow);
+    box-shadow: var(--shadow);
     border-radius: var(--corner);
     position: relative;
     min-width: 0;
@@ -125,4 +125,8 @@ h6 {
     width: 100%;
     display: grid;
     place-items: center;
+}
+
+.margin {
+    margin: 1rem;
 }
