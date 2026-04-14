@@ -89,15 +89,17 @@ h6 {
             transparent);
 }
 
-.marquee div {
+.marquee-track {
     display: inline-flex;
     animation: scroll 15s linear infinite;
+    transform: translateZ(0);
 }
 
-.marquee span {
+.marquee-content {
     white-space: nowrap;
     font-size: var(--font-size);
     -webkit-text-size-adjust: 100%;
+    transform: translateZ(0);
 }
 
 @keyframes scroll {
